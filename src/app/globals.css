@@ -1,26 +1,109 @@
-@import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #272727;
+  color: white; /* opcional: texto branco pra ficar visível */
 }
+
+/* pagina.css */
+
+.page {
+  background-color: #272727;
+  padding: 20px;
+  margin: 40px auto;
+  max-width: 1000px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.linha-caixas {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.entradas {
+  flex: 1;
+  min-width: 200px;
+  background-color: #000000;
+  padding: 20px;
+  border-radius: 8px;
+}
+.entradas strong {
+  font-size: 24px;
+  color:#00910c;
+}
+
+.saidas {
+  flex: 1;
+  min-width: 200px;
+  background-color: #000000;
+  padding: 20px;
+  border-radius: 8px;
+}
+.saidas strong {
+  font-size: 24px;
+  color:#db1616;
+}
+
+.balanco {
+  flex: 1;
+  min-width: 10px;
+  background-color: #000000;
+  padding: 20px;
+  border-radius: 8px;
+}
+.balanco strong {
+  font-size: 24px;
+  color:#00910c;
+}
+.paragrafoheaderA {
+  font-size: 12px; /* ou 10px, 14px etc. */
+  margin: 4px 0;
+}
+.paragrafoheaderB{
+  font-size: 12px; /* ou 10px, 14px etc. */
+  margin: 4px 0;
+  color: #5c5c5c;
+}
+
+.container {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start; /* alinha ao topo */
+}
+
+.bloco {
+  flex: 2; /* maior espaço */
+  display: flex;
+  flex-direction: column;
+}
+
+.bloco-categoria {
+  flex: 1; /* menor espaço */
+  display: flex;
+  flex-direction: column;
+}
+
+.analise {
+  background-color: #000;
+  padding: 100px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  color: white;
+}
+
+.categorias {
+  background-color: #000;
+  padding: 100px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: right;
+  color: white;
+}
+
+.titulos {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+
