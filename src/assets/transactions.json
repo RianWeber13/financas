@@ -1,0 +1,122 @@
+[
+  {
+    "id": "367f605a-ae00-4aa4-b413-759bad3084a7",
+    "description": "Supermercado",
+    "type": "expense",
+    "amount": 773.0,
+    "bank": "Flash",
+    "category": {
+      "icon": "ShoppingBasket",
+      "name": "Alimentação"
+    },
+    "date": "2025-01-05T10:00:00Z"
+  },
+  {
+    "id": "1a2b3c4d-5678-9101-1121-314151617181",
+    "description": "Restaurante",
+    "type": "expense",
+    "amount": 100.0,
+    "bank": "Banco do Brasil",
+    "category": {
+      "icon": "Utensils",
+      "name": "Refeições"
+    },
+    "date": "2025-01-03T12:30:00Z"
+  },
+  {
+    "id": "3c4d5e6f-7890-1112-1314-516171819203",
+    "description": "Cinema",
+    "type": "expense",
+    "amount": 60.0,
+    "bank": "Nubank",
+    "category": {
+      "icon": "Film",
+      "name": "Lazer"
+    },
+    "date": "2025-01-10T20:00:00Z"
+  },
+  {
+    "id": "4d5e6f7g-8901-1213-1415-617181920214",
+    "description": "Salário",
+    "type": "income",
+    "amount": 3200.0,
+    "bank": "Banco do Brasil",
+    "category": {
+      "icon": "DollarSign",
+      "name": "Rendimentos"
+    },
+    "date": "2024-12-30T09:00:00Z"
+  },
+  {
+    "id": "5e6f7g8h-9012-1314-1516-718192021225",
+    "description": "Farmácia",
+    "type": "expense",
+    "amount": 50.0,
+    "bank": "Banco do Brasil",
+    "category": {
+      "icon": "Heart",
+      "name": "Saúde"
+    },
+    "date": "2025-01-20T18:00:00Z"
+  },
+  {
+    "id": "6f7g8h9i-0123-1415-1617-819202122236",
+    "description": "Uber",
+    "type": "expense",
+    "amount": 25.0,
+    "bank": "Nubank",
+    "category": {
+      "icon": "Car",
+      "name": "Transporte"
+    },
+    "date": "2025-01-21T22:00:00Z"
+  },
+  {
+    "id": "8h9i0j1k-2345-1617-1819-021222324258",
+    "description": "Internet",
+    "type": "expense",
+    "amount": 67.0,
+    "bank": "Banco do Brasil",
+    "category": {
+      "icon": "Wifi",
+      "name": "Utilidades"
+    },
+    "date": "2025-01-05T10:00:00Z"
+  },
+  {
+    "id": "9i0j1k2l-3456-1718-1920-122232425269",
+    "description": "Energia Elétrica",
+    "type": "expense",
+    "amount": 450.0,
+    "bank": "Banco do Brasil",
+    "category": {
+      "icon": "Zap",
+      "name": "Utilidades"
+    },
+    "date": "2025-01-10T11:00:00Z"
+  },
+  {
+    "id": "10a1b2c3-d456-7890-1234-567890abcdef",
+    "description": "Padaria",
+    "type": "expense",
+    "amount": 33.0,
+    "bank": "Banco do Brasil",
+    "category": {
+      "icon": "ShoppingBasket",
+      "name": "Alimentação"
+    },
+    "date": "2025-01-11T08:00:00Z"
+  },
+  {
+    "id": "11b2c3d4-e567-8901-2345-678901bcdefg",
+    "description": "Posto de Gasolina",
+    "type": "expense",
+    "amount": 200.0,
+    "bank": "Banco do Brasil",
+    "category": {
+      "icon": "Fuel",
+      "name": "Transporte"
+    },
+    "date": "2025-01-15T14:00:00Z"
+  }
+]
