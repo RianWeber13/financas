@@ -19,7 +19,7 @@ export function ChartAnalyze() {
           boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <p>...</p>
+        <p>Gráfico</p>
       </div>
     </div>
   )
