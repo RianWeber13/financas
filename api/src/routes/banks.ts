@@ -1,5 +1,4 @@
 import { FastifyInstance } from 'fastify';
-import { z } from 'zod';
 import { prisma } from '../lib/prisma';
 import { Bank } from '../lib/object';
 
@@ -10,12 +9,9 @@ export async function bankRoutes(app: FastifyInstance) {
     return banks;
   });
 
-  // Criar um novo banco
   app.post('/banks', async (request, reply) => {
-    const createBankBody = z.object({
-      name: z.string(),
-    });
-    const { name } = createBankBody.parse(request.body);
+    const { name } = request.body as any;
+    
     const bank = new Bank({ name });
     await prisma.bank.create({
       data: { ...bank },

@@ -1,5 +1,4 @@
 import { FastifyInstance } from 'fastify';
-import { z } from 'zod';
 import { prisma } from '../lib/prisma';
 import { Category } from '../lib/object';
 
@@ -10,13 +9,9 @@ export async function categoryRoutes(app: FastifyInstance) {
     return categories;
   });
 
-  // Criar uma nova categoria
   app.post('/categories', async (request, reply) => {
-    const createCategoryBody = z.object({
-      name: z.string(),
-      icon: z.string(),
-    });
-    const { name, icon } = createCategoryBody.parse(request.body);
+    const { name, icon } = request.body as any;
+    
     const category = new Category({ name, icon });
     await prisma.category.create({
       data: { ...category },

@@ -1,31 +1,20 @@
-// prisma/schema.prisma
+// api/prisma/schema.prisma
 
 generator client {
   provider = "prisma-client-js"
 }
 
-//provider = "sqlite"
 datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
-// Modelo para a tabela de Transações
-model Transaction {
-  id          String   @id @default(uuid())
-  description String
-  type        String // 'income' ou 'expense'
-  amount      Float
-  date        DateTime
-
-  bankId      String
-  bank        Bank     @relation(fields: [bankId], references: [id])
-
-  categoryId  String
-  category    Category @relation(fields: [categoryId], references: [id])
+model Bank {
+  id           String        @id @default(uuid())
+  name         String        @unique
+  transactions Transaction[]
 }
 
-// Modelo para a tabela de Categorias
 model Category {
   id           String        @id @default(uuid())
   name         String        @unique
@@ -33,9 +22,14 @@ model Category {
   transactions Transaction[]
 }
 
-// Modelo para a tabela de Bancos
-model Bank {
-  id           String        @id @default(uuid())
-  name         String        @unique
-  transactions Transaction[]
+model Transaction {
+  id          String   @id @default(uuid())
+  description String
+  type        String
+  amount      Float
+  date        DateTime
+  bank        Bank     @relation(fields: [bankId], references: [id])
+  bankId      String
+  category    Category @relation(fields: [categoryId], references: [id])
+  categoryId  String
 }

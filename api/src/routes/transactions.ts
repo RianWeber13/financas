@@ -1,6 +1,5 @@
 import { FastifyInstance } from 'fastify';
-import { z } from 'zod';
-import { prisma } from '../lib'; 
+import { prisma } from '../lib/prisma';
 import { Transaction } from '../lib/object';
 
 export async function transactionRoutes(app: FastifyInstance) {
@@ -14,12 +13,8 @@ export async function transactionRoutes(app: FastifyInstance) {
     return transactions;
   });
 
-  // Obter uma transação por ID
   app.get('/transactions/:id', async (request) => {
-    const getTransactionParams = z.object({
-      id: z.string().uuid(),
-    });
-    const { id } = getTransactionParams.parse(request.params);
+    const { id } = request.params as { id: string };
     const transaction = await prisma.transaction.findUniqueOrThrow({
       where: { id },
       include: {
@@ -30,16 +25,9 @@ export async function transactionRoutes(app: FastifyInstance) {
     return transaction;
   });
 
-  // Criar uma nova transação
   app.post('/transactions', async (request, reply) => {
-    const createTransactionBody = z.object({
-      description: z.string(),
-      amount: z.number(),
-      type: z.enum(['income', 'expense']),
-      bankId: z.string().uuid(),
-      categoryId: z.string().uuid(),
-    });
-    const { description, amount, type, bankId, categoryId } = createTransactionBody.parse(request.body);
+    const { description, amount, type, bankId, categoryId } = request.body as any;
+    
     const transaction = new Transaction({
       description,
       amount,
@@ -48,26 +36,17 @@ export async function transactionRoutes(app: FastifyInstance) {
       bankId,
       categoryId,
     });
+
     await prisma.transaction.create({
       data: { ...transaction },
     });
     return reply.status(201).send();
   });
-  
-  // Atualizar uma transação
+
   app.put('/transactions/:id', async (request, reply) => {
-    const updateTransactionParams = z.object({
-      id: z.string().uuid(),
-    });
-    const updateTransactionBody = z.object({
-      description: z.string().optional(),
-      amount: z.number().optional(),
-      type: z.enum(['income', 'expense']).optional(),
-      bankId: z.string().uuid().optional(),
-      categoryId: z.string().uuid().optional(),
-    });
-    const { id } = updateTransactionParams.parse(request.params);
-    const data = updateTransactionBody.parse(request.body);
+    const { id } = request.params as { id: string };
+    const data = request.body as any;
+
     await prisma.transaction.update({
       where: { id },
       data,
@@ -75,12 +54,8 @@ export async function transactionRoutes(app: FastifyInstance) {
     return reply.status(204).send();
   });
 
-  // Excluir uma transação
   app.delete('/transactions/:id', async (request, reply) => {
-    const deleteTransactionParams = z.object({
-      id: z.string().uuid(),
-    });
-    const { id } = deleteTransactionParams.parse(request.params);
+    const { id } = request.params as { id: string };
     await prisma.transaction.delete({
       where: { id },
     });
