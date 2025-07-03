@@ -1,29 +1,17 @@
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import dotenv from 'dotenv';
-
-// Constrói o caminho para o diretório raiz do projeto
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-// O arquivo .env está dois níveis acima da pasta /api/src
-const projectRoot = path.resolve(__dirname, '..', '..'); 
-dotenv.config({ path: path.join(projectRoot, '.env') });
-
 import fastify from 'fastify';
 import cors from '@fastify/cors';
-import { transactionRoutes } from './routes'; 
+import { appRoutes } from './routes'; 
 
 const app = fastify({
   logger: true,
 });
 
-
-
 app.register(cors, {
   origin: '*', 
 });
 
-
-app.register(transactionRoutes);
+// rotas principais
+app.register(appRoutes);
 
 const start = async () => {
   try {
