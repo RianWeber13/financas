@@ -2,7 +2,7 @@ import { FastifyInstance } from 'fastify';
 import { transactionRoutes } from './routes/transactions';
 import { categoryRoutes } from './routes/categories';
 import { bankRoutes } from './routes/banks';
-import { seedRoutes } from './routes/seed';
+//import { seedRoutes } from './routes/seed';
 
 export async function appRoutes(app: FastifyInstance) {
   // Rotas
@@ -11,5 +11,5 @@ export async function appRoutes(app: FastifyInstance) {
   app.register(bankRoutes, { prefix: '/api/banks' });
   
   //popular o banco de dados
-  app.register(seedRoutes, { prefix: '/api' }); 
+  //app.register(seedRoutes, { prefix: '/api' }); 
 }

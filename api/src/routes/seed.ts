@@ -1,4 +1,4 @@
-import { FastifyInstance } from 'fastify'
+/*import { FastifyInstance } from 'fastify'
 import { prisma } from '../lib/prisma'
 
 export async function seedRoutes(app: FastifyInstance) {
@@ -74,4 +74,4 @@ export async function seedRoutes(app: FastifyInstance) {
       return reply.status(500).send({ message: 'Erro ao popular o banco de dados.', error })
     }
   })
-}
+}*/

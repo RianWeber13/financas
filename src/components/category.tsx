@@ -1,16 +1,20 @@
-import { type LucideIcon } from "lucide-react";
+import React from 'react';
 
+// 1. A interface agora aceita um 'React.ElementType' para o ícone.
+// Este é o tipo correto que está sendo passado a partir do page.tsx.
 interface CategoryProps {
   categories: {
     id: string;
-    icon: LucideIcon;
+    icon: React.ElementType; // Correção principal aqui
     name: string;
     quantity: number;
     amount: number;
   }[]
 }
+
 export function Category(props: CategoryProps) {
-  const { categories } = props
+  const { categories } = props;
+
   return (
     <div
       style={{
@@ -34,28 +38,38 @@ export function Category(props: CategoryProps) {
         overflowY: "auto",
         height: "100%",
       }}>
-        {categories.map((cat) => (
-          <div
-            key={cat.id}
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              gap: "1rem",
-              justifyContent: "space-between",
-              alignItems: "center",
-              padding: "0.5rem 1rem",
-              borderRadius: "0.5rem",
-              backgroundColor: "#f0f0f0",
-            }}
-          >
-            <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
-              {cat.icon && < cat.icon/>}
-              <span>{cat.name}</span>
+        {/* 2. Adicionamos a verificação de segurança, igual fizemos na tabela */}
+        {Array.isArray(categories) && categories.map((cat) => {
+          // 3. Renomeamos 'cat.icon' para 'IconComponent' para usá-lo como um componente JSX.
+          const IconComponent = cat.icon;
+          return (
+            <div
+              key={cat.id}
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                gap: "1rem",
+                justifyContent: "space-between",
+                alignItems: "center",
+                padding: "0.5rem 1rem",
+                borderRadius: "0.5rem",
+                backgroundColor: "#fff", // Fundo branco para melhor contraste
+              }}
+            >
+              <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+                {/* 4. Renderizamos o ícone de forma segura */}
+                {IconComponent && <IconComponent size={20} />}
+                <span>{cat.name}</span>
+              </div>
+              <div style={{display: 'flex', gap: '1rem', color: '#666'}}>
+                <span>{cat.quantity}x</span>
+                <span style={{fontWeight: 'bold'}}>
+                  {cat.amount.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
+                </span>
+              </div>
             </div>
-            <span>{cat.quantity}</span>
-            <span>{cat.amount}</span>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   )

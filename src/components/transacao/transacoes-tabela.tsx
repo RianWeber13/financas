@@ -1,15 +1,57 @@
-import * as lucide from "lucide-react";
-import transactions from "../../assets/transactions.json" with { type: "json" };
-import React, { useEffect } from "react";
+import {
+  LucideIcon,
+  ShoppingBasket,
+  Car,
+  Film,
+  DollarSign,
+  Heart,
+  Wifi,
+  Zap,
+  Fuel,
+  Utensils
+} from "lucide-react";
 
-type Transaction = typeof transactions[0];
+// Criamos um "mapa" para encontrar o componente de ícone correto a partir de seu nome (string)
+const iconMap: { [key: string]: LucideIcon } = {
+  ShoppingBasket,
+  Car,
+  Film,
+  DollarSign,
+  Heart,
+  Wifi,
+  Zap,
+  Fuel,
+  Utensils
+};
 
-export function TransactionTable() {
+// Interface para a estrutura de uma transação que vem da API
+interface Transaction {
+  id: string;
+  description: string;
+  type: 'income' | 'expense';
+  amount: number;
+  bank: { name: string };
+  category: {
+    icon: string; // O ícone virá da API como uma string (ex: "Car")
+    name: string;
+  };
+  date: string;
+}
 
-  useEffect(() => {
-    import("lucide-react").then((mod) => console.log(mod));
-  })
+// Interface para as propriedades (props) do nosso componente
+interface TransactionTableProps {
+  transactions: Transaction[];
+}
 
+export function TransactionTable({ transactions }: TransactionTableProps) {
+
+  // Função para obter o componente de ícone correto a partir do nome
+  const getIcon = (iconName: string) => {
+    const IconComponent = iconMap[iconName];
+    // Se o ícone for encontrado no mapa, renderiza o componente, senão não renderiza nada
+    return IconComponent ? <IconComponent size={20} /> : null;
+  };
+  
   return (
     <div
       style={{
@@ -43,7 +85,8 @@ export function TransactionTable() {
             </tr>
           </thead>
           <tbody>
-            {transactions.map((transaction: Transaction) => (
+            {/* Adicionamos uma verificação para garantir que 'transactions' é um array antes de usar .map */}
+            {Array.isArray(transactions) && transactions.map((transaction) => (
               (
                 <tr key={transaction.id} style={{
                   backgroundColor: "#f0f0f0",
@@ -51,64 +94,30 @@ export function TransactionTable() {
                   boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
                   padding: "0.5rem",
                 }}>
-                  <td style={{
-                    textAlign: "start",
-                    fontWeight: "normal",
-                    padding: "0.5rem",
-
-                  }}>
-                    {transaction.category.icon in lucide
-                      ? React.createElement(lucide[transaction.category.icon as keyof typeof lucide] as React.ElementType)
-                      : null}
-
+                  <td style={{ textAlign: "start", fontWeight: "normal", padding: "0.5rem" }}>
+                    {getIcon(transaction.category.icon)}
                   </td>
-                  <td style={{
-                    textAlign: "start",
-                    fontWeight: "normal",
-                    padding: "0.5rem",
-
-                  }}>
+                  <td style={{ textAlign: "start", fontWeight: "normal", padding: "0.5rem" }}>
                     {transaction.description}
                   </td>
-                  <td style={{
-                    textAlign: "start",
-                    fontWeight: "normal",
-                    padding: "0.5rem",
-
-                  }}>
+                  <td style={{ textAlign: "start", fontWeight: "normal", padding: "0.5rem" }}>
                     {transaction.type === "income" ? "Entrada" : "Saída"}
                   </td>
-                  <td style={{
-                    textAlign: "start",
-                    fontWeight: "normal",
-                    padding: "0.5rem",
-
-                  }}>
+                  <td style={{ textAlign: "start", fontWeight: "normal", padding: "0.5rem", color: transaction.type === 'income' ? 'green' : 'red' }}>
                     {transaction.amount.toLocaleString("pt-BR", {
                       style: "currency",
                       currency: "BRL",
                     })}
                   </td>
-                  <td style={{
-                    textAlign: "start",
-                    fontWeight: "normal",
-                    padding: "0.5rem",
-
-                  }}>
-                    {transaction.bank}
+                  <td style={{ textAlign: "start", fontWeight: "normal", padding: "0.5rem" }}>
+                    {transaction.bank.name}
                   </td>
-                  <td style={{
-                    textAlign: "start",
-                    fontWeight: "normal",
-                    padding: "0.5rem",
-
-                  }}>
-                    {new Date(transaction.date).toLocaleString("pt-BR")}
+                  <td style={{ textAlign: "start", fontWeight: "normal", padding: "0.5rem" }}>
+                    {new Date(transaction.date).toLocaleDateString("pt-BR")}
                   </td>
                 </tr>
               )
             ))}
-
           </tbody>
         </table>
       </div>

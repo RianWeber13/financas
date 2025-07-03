@@ -3,13 +3,12 @@ import { prisma } from '../lib/prisma';
 import { Category } from '../lib/object';
 
 export async function categoryRoutes(app: FastifyInstance) {
-
-  app.get('/categories', async () => {
+  app.get('/', async () => { // Mudar aqui
     const categories = await prisma.category.findMany();
     return categories;
   });
 
-  app.post('/categories', async (request, reply) => {
+    app.post('/', async (request, reply) => {
     const { name, icon } = request.body as any;
     
     const category = new Category({ name, icon });
