@@ -1,0 +1,63 @@
+# Este arquivo permite testar sua API diretamente do VS Code.
+# Execute cada bloco de requisição clicando em "Send Request" acima deles.
+# A ordem é importante para que os testes funcionem.
+
+### 1. Testar se a API está no ar
+GET http://localhost:3333/
+
+### ==============================================
+### CRIAÇÃO DE DADOS (POST)
+### ==============================================
+
+### 2. Criar um novo Banco
+# Execute este pedido e copie o "id" que será retornado na resposta.
+POST http://localhost:3333/api/banks
+Content-Type: application/json
+
+{
+  "name": "Nubank"
+}
+
+### 3. Criar uma nova Categoria
+# Execute este pedido e copie o "id" da resposta.
+POST http://localhost:3333/api/categories
+Content-Type: application/json
+
+{
+  "name": "Alimentação",
+  "icon": "ShoppingBasket"
+}
+
+### 4. Criar uma nova Transação
+# ANTES DE EXECUTAR:
+# Cole os IDs que você copiou dos passos 2 e 3 nos campos "bankId" e "categoryId".
+POST http://localhost:3333/api/transactions
+Content-Type: application/json
+
+{
+  "description": "Almoço no restaurante",
+  "amount": 45.50,
+  "type": "expense",
+  "bankId": "COLE_O_ID_DO_BANCO_AQUI",
+  "categoryId": "COLE_O_ID_DA_CATEGORIA_AQUI"
+}
+
+
+### ==============================================
+### LISTAGEM DE DADOS (GET)
+### ==============================================
+
+### 5. Listar todas as transações
+# Depois de criar a transação no passo 4, execute este pedido.
+# Você deverá ver a sua nova transação na lista, com os dados do banco e da categoria incluídos.
+GET http://localhost:3333/api/transactions
+
+
+### 6. Listar todos os bancos
+# Verifique se o banco "Nubank" que você criou aparece aqui.
+GET http://localhost:3333/api/banks
+
+
+### 7. Listar todas as categorias
+# Verifique se a categoria "Alimentação" que você criou aparece aqui.
+GET http://localhost:3333/api/categories
