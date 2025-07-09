@@ -1,11 +1,10 @@
 import React from 'react';
 
-// 1. A interface agora aceita um 'React.ElementType' para o ícone.
-// Este é o tipo correto que está sendo passado a partir do page.tsx.
+
 interface CategoryProps {
   categories: {
     id: string;
-    icon: React.ElementType; // Correção principal aqui
+    icon: React.ElementType; 
     name: string;
     quantity: number;
     amount: number;
@@ -38,9 +37,9 @@ export function Category(props: CategoryProps) {
         overflowY: "auto",
         height: "100%",
       }}>
-        {/* 2. Adicionamos a verificação de segurança, igual fizemos na tabela */}
+        {}
         {Array.isArray(categories) && categories.map((cat) => {
-          // 3. Renomeamos 'cat.icon' para 'IconComponent' para usá-lo como um componente JSX.
+          
           const IconComponent = cat.icon;
           return (
             <div
@@ -53,11 +52,11 @@ export function Category(props: CategoryProps) {
                 alignItems: "center",
                 padding: "0.5rem 1rem",
                 borderRadius: "0.5rem",
-                backgroundColor: "#fff", // Fundo branco para melhor contraste
+                backgroundColor: "#fff",
               }}
             >
               <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
-                {/* 4. Renderizamos o ícone de forma segura */}
+                {}
                 {IconComponent && <IconComponent size={20} />}
                 <span>{cat.name}</span>
               </div>

@@ -3,7 +3,7 @@ import { prisma } from '../lib/prisma';
 import { Category } from '../lib/object';
 
 export async function categoryRoutes(app: FastifyInstance) {
-  app.get('/', async () => { // Mudar aqui
+  app.get('/', async () => { 
     const categories = await prisma.category.findMany();
     return categories;
   });

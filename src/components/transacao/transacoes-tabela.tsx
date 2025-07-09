@@ -11,7 +11,7 @@ import {
   Utensils
 } from "lucide-react";
 
-// Criamos um "mapa" para encontrar o componente de ícone correto a partir de seu nome (string)
+
 const iconMap: { [key: string]: LucideIcon } = {
   ShoppingBasket,
   Car,
@@ -24,7 +24,7 @@ const iconMap: { [key: string]: LucideIcon } = {
   Utensils
 };
 
-// Interface para a estrutura de uma transação que vem da API
+
 interface Transaction {
   id: string;
   description: string;
@@ -32,23 +32,23 @@ interface Transaction {
   amount: number;
   bank: { name: string };
   category: {
-    icon: string; // O ícone virá da API como uma string (ex: "Car")
+    icon: string; 
     name: string;
   };
   date: string;
 }
 
-// Interface para as propriedades (props) do nosso componente
+
 interface TransactionTableProps {
   transactions: Transaction[];
 }
 
 export function TransactionTable({ transactions }: TransactionTableProps) {
 
-  // Função para obter o componente de ícone correto a partir do nome
+  
   const getIcon = (iconName: string) => {
     const IconComponent = iconMap[iconName];
-    // Se o ícone for encontrado no mapa, renderiza o componente, senão não renderiza nada
+    
     return IconComponent ? <IconComponent size={20} /> : null;
   };
   
@@ -85,7 +85,7 @@ export function TransactionTable({ transactions }: TransactionTableProps) {
             </tr>
           </thead>
           <tbody>
-            {/* Adicionamos uma verificação para garantir que 'transactions' é um array antes de usar .map */}
+            {}
             {Array.isArray(transactions) && transactions.map((transaction) => (
               (
                 <tr key={transaction.id} style={{

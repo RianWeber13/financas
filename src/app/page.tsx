@@ -1,4 +1,4 @@
-// src/app/page.tsx
+
 "use client"
 
 import { CardSummary } from "@/components/card-summary";
@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
-// Interfaces para os dados da API
+
 interface Transaction {
   id: string;
   description: string;
@@ -43,17 +43,17 @@ export default function Home() {
       try {
         const response = await fetch('http://localhost:3333/api/transactions');
         
-        // 1. VERIFICA SE A RESPOSTA DA API FOI BEM-SUCEDIDA
+      
         if (!response.ok) {
           throw new Error(`Erro na API: ${response.statusText}`);
         }
 
         const data = await response.json();
 
-        // 2. VERIFICA SE OS DADOS RECEBIDOS SÃO UM ARRAY
+       
         if (!Array.isArray(data)) {
             console.error("Os dados recebidos da API não são um array:", data);
-            return; // Interrompe a execução se não for um array
+            return; 
         }
 
         setTransactions(data);
@@ -62,7 +62,7 @@ export default function Home() {
         let totalExpense = 0;
         const categoryMap = new Map<string, { quantity: number, amount: number, name: string, icon: string }>();
 
-        // Este forEach agora é seguro
+        
         data.forEach(tx => {
           if (tx.type === 'income') {
             totalIncome += tx.amount;
