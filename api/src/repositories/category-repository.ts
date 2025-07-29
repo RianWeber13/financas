@@ -1,12 +1,13 @@
 import { Category } from '../lib/object';
+import { prisma } from '../lib/prisma';
 
 export interface CategoryRepository {
   findAll(): Promise<Category[]>;
   create(category: Omit<Category, 'id'>): Promise<Category>;
   findByName(name: string): Promise<Category | null>;
+  update(id: string, data: Partial<Category>): Promise<void>;
+  delete(id: string): Promise<void>;
 }
-
-import { prisma } from '../lib/prisma';
 
 export class PrismaCategoryRepository implements CategoryRepository {
   async findAll(): Promise<Category[]> {
@@ -18,4 +19,10 @@ export class PrismaCategoryRepository implements CategoryRepository {
   async findByName(name: string): Promise<Category | null> {
     return prisma.category.findFirst({ where: { name } });
   }
-} 
+  async update(id: string, data: Partial<Category>): Promise<void> {
+    await prisma.category.update({ where: { id }, data });
+  }
+  async delete(id: string): Promise<void> {
+    await prisma.category.delete({ where: { id } });
+  }
+}

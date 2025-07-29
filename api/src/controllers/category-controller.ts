@@ -18,4 +18,15 @@ export const CategoryController = {
       return reply.status(400).send({ error: err.message });
     }
   },
-}; 
+  async update(request: FastifyRequest, reply: FastifyReply) {
+    const { id } = request.params as { id: string };
+    const data = request.body as any;
+    await service.update(id, data);
+    return reply.status(204).send();
+  },
+  async delete(request: FastifyRequest, reply: FastifyReply) {
+    const { id } = request.params as { id: string };
+    await service.delete(id);
+    return reply.status(204).send();
+  },
+};

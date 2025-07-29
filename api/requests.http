@@ -1,63 +1,88 @@
-# Este arquivo permite testar sua API diretamente do VS Code.
-# Execute cada bloco de requisição clicando em "Send Request" acima deles.
-# A ordem é importante para que os testes funcionem.
 
-### 1. Testar se a API está no ar
-GET http://localhost:3333/
-
-### ==============================================
-### CRIAÇÃO DE DADOS (POST)
-### ==============================================
-
-### 2. Criar um novo Banco
-# Execute este pedido e copie o "id" que será retornado na resposta.
+###  Criar Banco 
 POST http://localhost:3333/api/banks
 Content-Type: application/json
 
 {
-  "name": "Nubank"
+  "name": "Banco Inter"
 }
 
-### 3. Criar uma nova Categoria
-# Execute este pedido e copie o "id" da resposta.
+#######################################
+
+#Listar os Bancos 
+GET http://localhost:3333/api/banks
+
+#######################################
+# Atualizar Banco 
+PUT http://localhost:3333/api/banks/47d487d6-a6c7-4bfd-bc29-9bdb48325143
+Content-Type: application/json
+
+{
+  "name": "Banco Inter S.A."
+}
+
+#######################################
+# Deletar Banco
+DELETE http://localhost:3333/api/banks/d0c09913-764d-4e5b-b23a-f0e597212e43
+
+#######################################
+
+### Criar Categoria
 POST http://localhost:3333/api/categories
 Content-Type: application/json
 
 {
-  "name": "Alimentação",
-  "icon": "ShoppingBasket"
+  "name": "Moradia",
+  "icon": "Home"
 }
 
-### 4. Criar uma nova Transação
-# ANTES DE EXECUTAR:
-# Cole os IDs que você copiou dos passos 2 e 3 nos campos "bankId" e "categoryId".
+#######################################
+# Listar Categoria 
+GET http://localhost:3333/api/categories
+
+#######################################
+# Atualizar Categoria
+PUT http://localhost:3333/api/categories/672f7887-228a-44cb-803c-854dd705f35b
+Content-Type: application/json
+
+{
+  "name": "Contas de Casa",
+  "icon": "Home"
+}
+
+#######################################
+# Deletar Categoria
+DELETE http://localhost:3333/api/categories/d236dd73-111a-4a0f-8154-7c68dea80a2a
+
+####################################### 
+
+# Criar Transação
 POST http://localhost:3333/api/transactions
 Content-Type: application/json
 
 {
-  "description": "Almoço no restaurante",
-  "amount": 45.50,
+  "description": "Aluguel",
+  "amount": 1800.50,
   "type": "expense",
-  "bankId": "COLE_O_ID_DO_BANCO_AQUI",
-  "categoryId": "COLE_O_ID_DA_CATEGORIA_AQUI"
+  "bankId": "47d487d6-a6c7-4bfd-bc29-9bdb48325143",
+  "categoryId": "672f7887-228a-44cb-803c-854dd705f35b"
 }
 
 
-### ==============================================
-### LISTAGEM DE DADOS (GET)
-### ==============================================
+#######################################
+# Buscar transação
+GET http://localhost:3333/api/transactions/f5f0c3f3-0951-43e9-8e7f-8929199f2fdf
 
-### 5. Listar todas as transações
-# Depois de criar a transação no passo 4, execute este pedido.
-# Você deverá ver a sua nova transação na lista, com os dados do banco e da categoria incluídos.
-GET http://localhost:3333/api/transactions
+#######################################
+# Atualizar Transação 
+PUT http://localhost:3333/api/transactions/f5f0c3f3-0951-43e9-8e7f-8929199f2fdf
+Content-Type: application/json
 
+{
+  "description": "Aluguel Atualizado",
+  "amount": 1850.00
+}
 
-### 6. Listar todos os bancos
-# Verifique se o banco "Nubank" que você criou aparece aqui.
-GET http://localhost:3333/api/banks
-
-
-### 7. Listar todas as categorias
-# Verifique se a categoria "Alimentação" que você criou aparece aqui.
-GET http://localhost:3333/api/categories
+#######################################
+# Deletar transação 
+DELETE http://localhost:3333/api/transactions/f5f0c3f3-0951-43e9-8e7f-8929199f2fdf

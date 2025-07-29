@@ -1,3 +1,4 @@
+import { Bank } from '../lib/object'; 
 import { BankRepository } from '../repositories/bank-repository';
 
 export class BankService {
@@ -15,4 +16,12 @@ export class BankService {
     const bank = await this.bankRepository.create({ name: data.name });
     return bank;
   }
-} 
+
+  async update(id: string, data: Partial<Bank>) {
+    await this.bankRepository.update(id, data);
+  }
+
+  async delete(id: string) {
+    await this.bankRepository.delete(id);
+  }
+}
