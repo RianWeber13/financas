@@ -17,8 +17,15 @@ export const TransactionController = {
   },
   async create(request: FastifyRequest, reply: FastifyReply) {
     try {
-      const { description, amount, type, bankId, categoryId } = request.body as any;
-      const transaction = await service.create({ description, amount, type, bankId, categoryId });
+      const { description, amount, type, bankId, categoryId, date } = request.body as any;
+      const transaction = await service.create({ 
+        description, 
+        amount, 
+        type, 
+        bankId, 
+        categoryId,
+        date: date ? new Date(date) : new Date()
+      });
       return reply.status(201).send(transaction);
     } catch (err: any) {
       return reply.status(400).send({ error: err.message });
